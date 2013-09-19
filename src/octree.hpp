@@ -106,6 +106,7 @@ public:
 		}
 		btb = btb1 ;
 	}
+	// index is in [0, 7]
 	int getSign ( int index ) { return (( signs >> index ) & 1 ); };
 };
 
@@ -201,7 +202,7 @@ public:
 		}
 	};
 
-	NodeType getType ( ) { return LEAF ; };
+	NodeType getType() { return LEAF ; };
 };
 
 // leaf, but not at max depth
@@ -254,15 +255,15 @@ public:
 class Octree {
 public:
 	OctreeNode* root ;
-	int dimen; 	   // Length of grid
+	int dimen; // Length of grid
 	int maxDepth;
-	//int hasQEF;    // used in simplify(), can be removed
 	int faceVerts, edgeVerts;
 	int actualTris ; // number of triangles produced by cellProcContour()
 	int founds, news ;
-public:
+	int st[3]; // start-pt of root node
+
 	Octree();
-	~Octree();
+	virtual ~Octree();
 	void simplify( float thresh );
 	void genContour( char* fname );
 	//void genContourNoInter ( char* fname ) ; // not called from main() ?

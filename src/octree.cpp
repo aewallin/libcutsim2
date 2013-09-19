@@ -32,12 +32,22 @@
 #include "PLYWriter.hpp"
 
 Octree::Octree() {
+	st[0] = 0;
+	st[1] = 0;
+	st[2] = 0;
+	dimen = 1 << 10;
+	maxDepth = 7;
+	root = new InternalNode();
+}
 
+Octree::~Octree() {
+	if (root!=NULL)
+		delete root;
 }
 
 void Octree::simplify( float thresh ) {
-	int st[3] = {0,0,0};
-	this->root = simplify( this->root, st, this->dimen, thresh ) ;
+	//int st[3] = {0,0,0};
+	this->root = simplify( this->root, this->st, this->dimen, thresh ) ;
 }
 
 // count number of INTERNAL, LEAF, PSEUDOLEAF nodes

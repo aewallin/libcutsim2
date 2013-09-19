@@ -89,8 +89,14 @@ add_library(
     STATIC
     ${CUTSIM_SRC}
 )
-
 set_target_properties(libcutsim2_static PROPERTIES PREFIX "") # avoid liblib
+
+add_executable(
+	test
+	main.cpp
+)
+target_link_libraries(test libcutsim2_static) 
+
 
 # this makes the Python module
 add_library(
